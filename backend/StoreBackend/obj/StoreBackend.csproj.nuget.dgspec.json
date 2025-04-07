@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/richy/Documents/Github/london-api/backend/StoreBackend/StoreBackend.csproj": {}
+    "/src/backend/StoreBackend/StoreBackend.csproj": {}
   },
   "projects": {
-    "/Users/richy/Documents/Github/london-api/backend/StoreBackend/StoreBackend.csproj": {
+    "/src/backend/StoreBackend/StoreBackend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/richy/Documents/Github/london-api/backend/StoreBackend/StoreBackend.csproj",
+        "projectUniqueName": "/src/backend/StoreBackend/StoreBackend.csproj",
         "projectName": "StoreBackend",
-        "projectPath": "/Users/richy/Documents/Github/london-api/backend/StoreBackend/StoreBackend.csproj",
-        "packagesPath": "/Users/richy/.nuget/packages/",
-        "outputPath": "/Users/richy/Documents/Github/london-api/backend/StoreBackend/obj/",
+        "projectPath": "/src/backend/StoreBackend/StoreBackend.csproj",
+        "packagesPath": "/root/.nuget/packages/",
+        "outputPath": "/src/backend/StoreBackend/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/richy/.nuget/NuGet/NuGet.Config"
+          "/root/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -46,7 +46,7 @@
           "dependencies": {
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[9.0.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -76,7 +76,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.202/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

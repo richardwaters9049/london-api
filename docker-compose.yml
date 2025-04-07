@@ -1,12 +1,19 @@
 # version: "3.8"
-
 services:
   backend:
     build:
-      context: . # Root directory
+      context: .
       dockerfile: backend/StoreBackend/Dockerfile
+      target: development
     ports:
-      - "5000:80"
+      - "5000:5000" # Map host 5000 to container 5000
+    volumes:
+      - ./backend/StoreBackend:/src/backend/StoreBackend
+      - ~/.nuget/packages:/root/.nuget/packages
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DOTNET_WATCH_RESTART_ON_RUDE_EDIT=true
+      - ASPNETCORE_URLS=http://+:5000 # Force port 5000
 
   frontend:
     build:
@@ -14,5 +21,11 @@ services:
       dockerfile: frontend/Dockerfile
     ports:
       - "3000:3000"
+    volumes:
+      - ./frontend:/app # Mount frontend code
+      - /app/node_modules # Preserve container modules
+    environment:
+      - NODE_ENV=development
+    command: bun run dev # Next.js dev server
     depends_on:
       - backend

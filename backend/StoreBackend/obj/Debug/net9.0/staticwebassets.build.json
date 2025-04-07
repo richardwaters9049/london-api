@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "Kf2iQCeimqq+eDbb17xGO1v5cF6kLf9gTKhrKKKSgCY=",
+  "Source": "StoreBackend",
+  "BasePath": "_content/StoreBackend",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

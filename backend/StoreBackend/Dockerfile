@@ -1,11 +1,25 @@
-FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS development
 WORKDIR /src
 
-# Copy just the project file first
-COPY ["backend/StoreBackend/StoreBackend.csproj", "backend/StoreBackend/"]
-RUN dotnet restore "backend/StoreBackend/StoreBackend.csproj"
+# First, copy just the solution/project files
+COPY ["backend/StoreBackend/*.csproj", "backend/StoreBackend/"]
+COPY ["backend/*.sln", "backend/"]
+
+# Force complete NuGet restore
+RUN dotnet restore "backend/StoreBackend/StoreBackend.csproj" --disable-parallel
 
 # Then copy everything else
+COPY . .
+WORKDIR "/src/backend/StoreBackend"
+
+# Development command with forced restore
+CMD ["dotnet", "watch", "run"]
+
+# Production build stage (keep your existing build)
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+WORKDIR /src
+COPY ["backend/StoreBackend/StoreBackend.csproj", "backend/StoreBackend/"]
+RUN dotnet restore "backend/StoreBackend/StoreBackend.csproj"
 COPY . .
 WORKDIR "/src/backend/StoreBackend"
 RUN dotnet build -c Release -o /app/build
