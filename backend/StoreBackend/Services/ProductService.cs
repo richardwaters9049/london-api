@@ -1,27 +1,14 @@
-using Refit;
+using StoreBackend.Models;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
-namespace StoreBackend.Services
+namespace StoreBackend.Services;
+
+public class ProductService
 {
-    public interface IProductApi
+    private readonly List<Product> _products = new()
     {
-        [Get("/products?category=clothing")]
-        Task<List<Product>> GetProducts();
-    }
+        new Product { Id = 1, Name = "Sample Product", Price = 9.99m, Quantity = 10 }
+    };
 
-    public class ProductService
-    {
-        private readonly IProductApi _api;
-
-        public ProductService()
-        {
-            _api = RestService.For<IProductApi>("https://fakestoreapi.com");
-        }
-
-        public async Task<List<Product>> GetProducts()
-        {
-            return await _api.GetProducts();
-        }
-    }
+    public IEnumerable<Product> GetProducts() => _products;
 }

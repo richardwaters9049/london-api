@@ -1,22 +1,18 @@
-version: "3.9"
+# version: "3.8"
 
 services:
   backend:
     build:
-      context: ./StoreBackend
-      dockerfile: Dockerfile
+      context: . # Root directory
+      dockerfile: backend/StoreBackend/Dockerfile
     ports:
       - "5000:80"
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
 
   frontend:
     build:
-      context: ./frontend
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: frontend/Dockerfile
     ports:
       - "3000:3000"
-    environment:
-      - NEXTAUTH_URL=http://localhost:3000
     depends_on:
       - backend

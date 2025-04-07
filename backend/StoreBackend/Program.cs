@@ -1,19 +1,33 @@
+using StoreBackend.Services;
+using Microsoft.OpenApi.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+builder.Services.AddControllers();
+builder.Services.AddSingleton<ProductService>();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Store API", Version = "v1" });
+});
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI(c => 
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Store API v1");
+    });
 }
 
 app.UseHttpsRedirection();
+app.UseAuthorization();
 
+// Weather Forecast Endpoint
 var summaries = new[]
 {
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
@@ -33,7 +47,14 @@ app.MapGet("/weatherforecast", () =>
 })
 .WithName("GetWeatherForecast");
 
-builder.Services.AddSingleton<ProductService>();
+// Products Endpoint
+app.MapGet("/api/products", (ProductService productService) =>
+{
+    return productService.GetProducts();
+})
+.WithName("GetProducts");
+
+app.MapControllers();
 
 app.Run();
 
